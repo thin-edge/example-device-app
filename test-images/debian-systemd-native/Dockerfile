@@ -13,7 +13,7 @@ RUN apt-get update \
     && tedge config unset http.client.host
 
 # Install latest from main release channel
-RUN wget -O - thin-edge.io/install.sh | sh -s -- --channel main
+# RUN wget -O - thin-edge.io/install.sh | sh -s -- --channel main
 
 COPY dist/*.deb /tmp/
 RUN dpkg -i --force-overwrite /tmp/*.deb \
