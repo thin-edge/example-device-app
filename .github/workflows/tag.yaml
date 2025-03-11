@@ -1,0 +1,22 @@
+name: tag
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        type: choice
+        description: Version Bump
+        options:
+          - patch
+          - minor
+          - major
+jobs:
+  create_tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create tag if changed
+        run: |
+          ./ci/tag.sh ${{ inputs.bump }}
