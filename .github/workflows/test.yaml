@@ -50,9 +50,6 @@ jobs:
 
       - uses: taiki-e/install-action@just
 
-      - name: install c8y-tedge extension
-        run: c8y extension install thin-edge/c8y-tedge
-
       - name: create .env file
         run: |
           touch .env
