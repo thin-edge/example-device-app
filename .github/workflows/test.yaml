@@ -57,6 +57,9 @@ jobs:
           echo 'C8Y_USER="${{ secrets.C8Y_USER }}"' >> .env
           echo 'C8Y_PASSWORD="${{ secrets.C8Y_PASSWORD }}"' >> .env
 
+      #
+      # Test
+      #
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -64,21 +67,6 @@ jobs:
           cache-dependency-path: |
             tests/requirements.txt
 
-      #
-      # Build
-      #
-      - uses: actions/setup-go@v5
-        with:
-          go-version: stable
-          cache: false
-      - name: Install dependencies
-        run: |
-          go install github.com/goreleaser/nfpm/v2/cmd/nfpm@latest
-          go install github.com/goreleaser/goreleaser/v2@latest
-
-      #
-      # Test
-      #
       - name: Build test images
         run: |
           just venv
