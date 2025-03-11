@@ -21,6 +21,9 @@ esac
 
 git config --global user.email "info@thin-edge.io"
 git config --global user.name "Versioneer"
-echo "Creating tag: $NEXT_VERSION"
+echo "Creating tag: $NEXT_VERSION" >&2
 git tag -a "$NEXT_VERSION" -m "Release $NEXT_VERSION"
 git push origin "$NEXT_VERSION"
+
+# return next version
+echo "$NEXT_VERSION"
