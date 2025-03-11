@@ -8,6 +8,7 @@ RUN apt-get update \
         jq \
         curl \
         bc \
+        tedge-log-provider \
     && tedge config unset c8y.proxy.client.host \
     && tedge config unset mqtt.client.host \
     && tedge config unset http.client.host
