@@ -69,7 +69,9 @@ jobs:
           c8y software get --id "$PACKAGE_NAME" -n --silentStatusCodes 404 ||
             c8y software create -n --softwareType apt --name "$PACKAGE_NAME"
 
+          # Only create reference to software/version, don't upload the package directly
+          # as it will be accessible from cloudsmith
           c8y software versions create -n \
             --software "$PACKAGE_NAME" \
             --version "${{ env.RELEASE_VERSION }}" \
-            --file dist/*.deb
+            --url " "
