@@ -60,7 +60,7 @@ jobs:
           C8Y_USER: '${{ secrets.C8Y_USER }}'
           C8Y_PASSWORD: '${{ secrets.C8Y_PASSWORD }}'
         run: |
-          c8y software get --id "$PACKAGE_NAME" -n --silentStatusCodes ||
+          c8y software get --id "$PACKAGE_NAME" -n --silentStatusCodes 404 ||
             c8y software create -n --softwareType apt --name "$PACKAGE_NAME"
 
           c8y software versions create -n \
