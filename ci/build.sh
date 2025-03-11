@@ -27,7 +27,7 @@ packages=(
 
 for package_type in "${packages[@]}"; do
     echo ""
-    if command -V nfpm >/dev/null >&2; then
+    if command -V nfpm >/dev/null 2>&1; then
         nfpm package --packager "$package_type" --target ./dist/
     else
         docker run --rm -e "SEMVER=$SEMVER" -v "$PWD:/tmp" -w /tmp goreleaser/nfpm package \
