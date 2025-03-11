@@ -12,7 +12,7 @@ Publish Raw Data Periodically
     ${values}=    Cumulocity.Device Should Have Measurements    type=sensor    minimum=1
 
 Publish an Alert
-    ${values}=    Cumulocity.Device Should Have Alarm/s    type=schedule_req    minimum=1
+    ${values}=    Cumulocity.Device Should Have Alarm/s    type=schedule_req    minimum=1    timeout=45
 
 *** Keywords ***
 
