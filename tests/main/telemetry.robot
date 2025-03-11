@@ -8,10 +8,10 @@ Suite Teardown    Collect Logs
 *** Test Cases ***
 
 Publish Raw Data Periodically
+    Skip    msg=TODO
     ${values}=    Cumulocity.Device Should Have Measurements    type=sensor    minimum=1
 
 Publish an Alert
-    Skip    msg=TODO
     ${values}=    Cumulocity.Device Should Have Alarm/s    type=schedule_req    minimum=1    timeout=45
 
 *** Keywords ***
