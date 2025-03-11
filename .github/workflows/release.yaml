@@ -46,6 +46,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           generate_release_notes: true
+          name: ${{ env.RELEASE_VERSION }}
+          tag_name: ${{ env.RELEASE_VERSION }}
           draft: true
           files: |
             ./dist/*
