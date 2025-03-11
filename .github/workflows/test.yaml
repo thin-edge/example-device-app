@@ -30,7 +30,6 @@ jobs:
       name: Test
     runs-on: ubuntu-latest
     env:
-      COMPOSE_PROJECT_NAME: ci_${{github.run_id}}_${{github.run_attempt || '1'}}
       TEST_IMAGE: ${{ matrix.job.image }}
     strategy:
       fail-fast: false
