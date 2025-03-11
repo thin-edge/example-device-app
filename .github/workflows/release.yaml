@@ -66,4 +66,4 @@ jobs:
           c8y software versions create -n \
             --software "$PACKAGE_NAME" \
             --version "${{ env.RELEASE_VERSION }}" \
-            --url " "
+            --file dist/*.deb

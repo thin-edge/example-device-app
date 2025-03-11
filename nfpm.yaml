@@ -48,20 +48,28 @@ contents:
 
 overrides:
   apk:
+    depends:
+      - bc
+      - jq
+      - tedge
     # Note: don't depend on tedge for apk to allow installing in the tedge container image (which just has the tedge binaries)
     scripts:
       postinstall: ./packaging/postinstall
       postremove: ./packaging/postremove
 
   rpm:
-    recommends:
+    depends:
+      - bc
+      - jq
       - tedge
     scripts:
       postinstall: ./packaging/postinstall
       postremove: ./packaging/postremove
 
   deb:
-    recommends:
+    depends:
+      - bc
+      - jq
       - tedge
     scripts:
       postinstall: ./packaging/postinstall
