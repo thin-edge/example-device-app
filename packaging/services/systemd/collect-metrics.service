@@ -1,0 +1,10 @@
+[Unit]
+Description=Collect sensor data
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/collect-metrics.sh basic
+
+[Install]
+WantedBy=multi-user.target

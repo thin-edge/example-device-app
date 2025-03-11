@@ -1,0 +1,68 @@
+# yaml-language-server: $schema=https://nfpm.goreleaser.com/static/schema.json
+---
+name: example-device-app
+arch: all
+platform: linux
+version: ${SEMVER}
+section: misc
+priority: optional
+maintainer: Community <community@thin-edge.io>
+description: Device application utilizing thin-edge.io to easy development
+vendor: thin-edge.io
+homepage: https://github.com/thin-edge/example-device-app
+license: Apache License 2.0
+disable_globbing: false
+apk:
+  # Use noarch instead of "all"
+  arch: noarch
+contents:
+  - src: ./src/collect-metrics.sh
+    dst: /usr/bin/collect-metrics.sh
+    file_info:
+      mode: 0755
+
+  # service definitions
+  - src: ./packaging/services/systemd/*
+    dst: /lib/systemd/system/
+    file_info:
+      mode: 0644
+    packager: deb
+
+  - src: ./packaging/services/sysvinit/collect-metrics
+    dst: /etc/init.d/
+    file_info:
+      mode: 0755
+    packager: deb
+
+  - src: ./packaging/services/systemd/*
+    dst: /lib/systemd/system/
+    file_info:
+      mode: 0644
+    packager: rpm
+  
+  - src: ./packaging/services/sysvinit/collect-metrics
+    dst: /etc/init.d/
+    file_info:
+      mode: 0755
+    packager: rpm
+
+overrides:
+  apk:
+    # Note: don't depend on tedge for apk to allow installing in the tedge container image (which just has the tedge binaries)
+    scripts:
+      postinstall: ./packaging/postinstall
+      postremove: ./packaging/postremove
+
+  rpm:
+    recommends:
+      - tedge
+    scripts:
+      postinstall: ./packaging/postinstall
+      postremove: ./packaging/postremove
+
+  deb:
+    recommends:
+      - tedge
+    scripts:
+      postinstall: ./packaging/postinstall
+      postremove: ./packaging/postremove
