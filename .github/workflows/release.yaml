@@ -27,7 +27,8 @@ jobs:
 
       - name: Set version
         run: |
-          NEXT_VERSION=$(./ci/tag.sh | tail -n1)
+          set -euxo pipefail
+          NEXT_VERSION=$(./ci/tag.sh "${{ inputs.bump }}" | tail -n1)
           echo "RELEASE_VERSION=${NEXT_VERSION}" >> $GITHUB_ENV
       - name: Package
         run: ./ci/build.sh

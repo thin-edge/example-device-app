@@ -1,9 +1,6 @@
 #!/bin/sh
 set -e
-if [ -n "$CI" ]; then
-    set -x
-fi
-bump="$1"
+bump="${1:-patch}"
 
 CURRENT_VERSION=$(git describe --tags --abbrev=0)
 
@@ -18,6 +15,11 @@ case "$bump" in
         NEXT_VERSION=$(echo "$CURRENT_VERSION" | awk -F. '{$NF+=1; OFS="."; print ($1 + 1)"."$2"."$3}')
         ;;
 esac
+
+if [ -z "$NEXT_VERSION" ]; then
+    echo "invalid version bump. something unexpected went wrong" >&2
+    exit 1
+fi
 
 git config --global user.email "info@thin-edge.io"
 git config --global user.name "Versioneer"
